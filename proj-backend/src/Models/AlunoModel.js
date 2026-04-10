@@ -9,6 +9,16 @@ const getAllAlunos = async () => {
     return result.rows;
 };
 
+const listar_visao = async () => {
+    const result = await pool.query(
+        `SELECT c.nome, t. anoLetivo, a.nomeCompleto
+        FROM alunos a INNER JOIN turmas t ON a.idTurma = t.idTurma
+        INNER JOIN cursos c ON t.idCurso = c.idCurso
+        ORDER BY IdAluno`
+    );
+    return result.rows;
+};
+
 const getAlunoById = async (idAluno) => {
     const result = await pool.query(
         `SELECT idAluno, nomeCompleto, cpf, dataNascimento, email, idTurma 
@@ -57,5 +67,6 @@ module.exports = {
     createAluno,
     updateAluno,
     deleteAluno,
+    listar_visao,
     countTurmaAssociada
 };

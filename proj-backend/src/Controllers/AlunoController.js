@@ -9,6 +9,15 @@ const getAllAlunos = async (req, res) => {
         res.status(500).json({ error: 'Erro ao obter alunos' });
     }
 };
+const listar_visao = async (req, res) => {
+    try {
+        const alunos = await alunoModel.listar_visao();
+        res.status(200).json(alunos);
+    } catch (error) {
+        console.error('Erro ao obter alunos:', error);
+        res.status(500).json({ error: 'Erro ao obter alunos' });
+    }
+};
 
 const getAlunoById = async (req, res) => {
     const { idAluno } = req.params;
@@ -85,5 +94,6 @@ module.exports = {
     getAlunoById,
     createAluno,
     updateAluno,
+    listar_visao,
     deleteAluno
 };
